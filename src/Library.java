@@ -1,13 +1,12 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Library {
     private HashMap<String, Book> books;
-    private ArrayList<Member> members;
+    private HashMap<String, Member> members;
 
     public Library() {
         this.books = new HashMap<>();
-        this.members = new ArrayList<>();
+        this.members = new HashMap<>();
     }
 
     // ----- Book management -----
@@ -41,22 +40,15 @@ public class Library {
     // ----- Member management -----
 
     public boolean addMember(Member member) {
-        for (Member m : members) {
-            if (m.getMemberId().equals(member.getMemberId())) {
-                return false; // already exists
-            }
+        if (members.containsKey(member.getMemberId())) {
+            return false; // already exists
         }
-        members.add(member);
+        members.put(member.getMemberId(), member);
         return true;
     }
 
     public Member findMember(String memberId) {
-        for (Member m : members) {
-            if (m.getMemberId().equals(memberId)) {
-                return m;
-            }
-        }
-        return null;
+        return members.get(memberId);
     }
 
     // ----- Borrowing logic -----
