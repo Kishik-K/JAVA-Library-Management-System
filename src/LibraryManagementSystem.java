@@ -35,6 +35,11 @@ public class LibraryManagementSystem {
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
 
+                    if (title.trim().isEmpty() || author.trim().isEmpty() || isbn.trim().isEmpty()) {
+                        error("Title, author, and ISBN cannot be empty.");
+                        break;
+                    }
+
                     Book book = new Book(title, author, isbn);
                     if (library.addBook(book)) {
                         success("Book added to the library.");
