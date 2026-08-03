@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-public class LibraryManagementSystem{
-    //ANSI COLOR CODES:::::
+public class LibraryManagementSystem {
+
+    // ANSI color codes
     static final String RESET = "\u001B[0m";
     static final String CYAN = "\u001B[36m";
     static final String GREEN = "\u001B[32m";
@@ -9,7 +10,7 @@ public class LibraryManagementSystem{
     static final String YELLOW = "\u001B[33m";
     static final String BOLD = "\u001B[1m";
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Library library = new Library();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -130,5 +131,17 @@ public class LibraryManagementSystem{
         }
         scanner.close();
     }
+
+    static void printMenu() {
+        System.out.println(CYAN + BOLD + "\n╔══════════════════════════════════════╗");
+        System.out.println("║       LIBRARY MANAGEMENT SYSTEM       ║");
+        System.out.println("╠══════════════════════════════════════╣" + RESET);
+        System.out.println(" 1. Add Book        5. Add Member");
+        System.out.println(" 2. Remove Book      6. Borrow Book");
+        System.out.println(" 3. List Books       7. Return Book");
+        System.out.println(" 4. Search Book      8. Exit");
+        System.out.println(CYAN + BOLD + "╚══════════════════════════════════════╝" + RESET);
     }
+
+
 }
