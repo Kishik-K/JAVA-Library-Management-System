@@ -39,6 +39,15 @@ public class LibraryManagementSystem {
                         System.out.println(book);
                     }break;
                 case 4:
+                    System.out.println("Enter the Name of the book you want to search: ");
+                    String book = scanner.nextLine();
+                    for (int i=0; i< arr.size(); i++){
+                        if (arr.get(i).equals(book)){
+                            System.out.println("Book found: " + arr.get(i));
+                        }else {
+                            System.out.println("Book not found...!");
+                        }
+                    }
 
             }
         }
