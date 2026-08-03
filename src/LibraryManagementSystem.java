@@ -143,5 +143,15 @@ public class LibraryManagementSystem {
         System.out.println(CYAN + BOLD + "╚══════════════════════════════════════╝" + RESET);
     }
 
+    static void printHeader(String title) {
+        System.out.println(YELLOW + "\n--- " + title + " ---" + RESET);
+    }
 
+    static void success(String msg) {
+        System.out.println(GREEN + "✔ " + msg + RESET);
+    }
+
+    static void error(String msg) {
+        System.out.println(RED + "✘ " + msg + RESET);
+    }
 }
