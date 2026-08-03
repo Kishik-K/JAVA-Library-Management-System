@@ -22,8 +22,15 @@ public class LibraryManagementSystem {
             printMenu();
             System.out.print(YELLOW + "Enter your choice: " + RESET);
 
-            choice = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                scanner.nextLine();
+                error("Please enter a number.");
+                continue;
+            }
+
 
             switch (choice) {
                 case 1: {
