@@ -47,8 +47,14 @@ public class LibraryManagementSystem {
                         }else {
                             System.out.println("Book not found...!");
                         }
-                    }
-
+                    }break;
+                case 5:
+                    isBook = false;
+                    System.out.println("Exit.");
+                    break;
+                default:
+                    System.out.println("Invalid choice...!");
+                    break;
             }
         }
     }
