@@ -15,6 +15,8 @@ Built as part of a structured Java learning roadmap (OOP fundamentals → Collec
 - 🔄 Borrow and return books, with availability tracking
 - 🌱 Pre-seeded demo data on startup
 - 🎨 Colorized console UI (ANSI escape codes) with success/error indicators
+- 🛡️ Input validation on all data-entry fields (no blank titles, IDs, ISBNs, etc.)
+- 🧯 Crash-proof menu input — invalid (non-numeric) choices are caught and handled gracefully instead of terminating the program
 
 ---
 
@@ -60,7 +62,7 @@ classDiagram
 
     class Library {
         -HashMap~String, Book~ books
-        -ArrayList~Member~ members
+        -HashMap~String, Member~ members
         +addBook(Book) boolean
         +removeBook(String isbn) boolean
         +searchBook(String isbn) Book
@@ -99,8 +101,9 @@ classDiagram
 
 **Why it's structured this way:**
 - `Library` is the single source of truth — books and members are never accessed or modified from outside it
+- Both `books` and `members` are keyed `HashMap`s (by ISBN and Member ID respectively) — lookups are O(1) instead of looping through a list
 - Borrowing is a *transaction between two objects* (`Book` + `Member`), so that logic lives in `Library`, not shoved into either class alone
-- `LibraryManagementSystem` (the `main` class) is a pure UI layer — it only reacts to `true`/`false` results and decides what to print
+- `LibraryManagementSystem` (the `main` class) is a pure UI layer — it only reacts to `true`/`false` results and decides what to print, and never lets bad input (blank fields, non-numeric menu choices) reach the logic layer
 
 ---
 
@@ -130,6 +133,9 @@ classDiagram
 
 This project is intentionally left open for expansion as I progress through my Java learning path:
 
+- [x] Convert `members` from `ArrayList` to `HashMap` for O(1) lookups
+- [x] Input validation on all data-entry fields
+- [x] Crash-proof menu input handling
 - [ ] Custom exceptions (`BookNotAvailableException`, `MemberNotFoundException`, etc.)
 - [ ] Generic `Repository<T>` to unify book/member management
 - [ ] Overdue tracking with due dates (`LocalDate`)
@@ -144,8 +150,9 @@ This project is intentionally left open for expansion as I progress through my J
 |---|---|
 | Encapsulation | Private fields + controlled access across all entity classes |
 | Separation of Concerns | UI layer never touches raw collections directly |
-| Collections Framework | `HashMap` for O(1) ISBN lookups, `ArrayList` for ordered lists |
+| Collections Framework | `HashMap` for O(1) lookups on both books (by ISBN) and members (by ID) |
 | Clean method design | Boolean-based success/failure contracts between layers |
+| Defensive programming | Input validation on every data-entry field, `try-catch` around menu input to prevent crashes |
 
 ---
 
