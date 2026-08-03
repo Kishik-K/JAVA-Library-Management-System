@@ -87,6 +87,11 @@ public class LibraryManagementSystem {
                     System.out.print("Member ID: ");
                     String memberId = scanner.nextLine();
 
+                    if (name.trim().isEmpty() || memberId.trim().isEmpty()) {
+                        error("Name and Member ID cannot be empty.");
+                        break;
+                    }
+
                     Member member = new Member(name, memberId);
                     if (library.addMember(member)) {
                         success("Member added.");
