@@ -36,4 +36,26 @@ public class Library {
         return books.get(isbn);
     }
 
+    // ------------MEMBER MANAGEMENT-----------
+
+    public boolean addMember(Member member){
+        for (Member m : members ){
+            if(m.getMemberId().equals(member.getMemberId())){
+                return false;
+            }
+        }
+        members.add(member);
+        return true;
+    }
+
+    public Member findMember(String memberId){
+        for (Member m : members){
+            if(m.getMemberId().equals(memberId)){
+                return m;
+            }
+        }
+        return null;
+    }
+
+
 }
