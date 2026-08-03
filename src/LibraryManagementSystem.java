@@ -75,6 +75,12 @@ public class LibraryManagementSystem {
                     printHeader("SEARCH BOOK");
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
+
+                    if (isbn.trim().isEmpty()) {
+                        error("ISBN cannot be empty.");
+                        break;
+                    }
+
                     Book found = library.searchBook(isbn);
                     if (found != null) {
                         success("Found: " + found);
@@ -112,6 +118,11 @@ public class LibraryManagementSystem {
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
 
+                    if (memberId.trim().isEmpty() || isbn.trim().isEmpty()) {
+                        error("Member ID and ISBN cannot be empty.");
+                        break;
+                    }
+
                     if (library.borrowBook(memberId, isbn)) {
                         success("Book borrowed successfully.");
                     } else {
@@ -126,6 +137,11 @@ public class LibraryManagementSystem {
                     String memberId = scanner.nextLine();
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
+
+                    if (memberId.trim().isEmpty() || isbn.trim().isEmpty()) {
+                        error("Member ID and ISBN cannot be empty.");
+                        break;
+                    }
 
                     if (library.returnBook(memberId, isbn)) {
                         success("Book returned successfully.");
