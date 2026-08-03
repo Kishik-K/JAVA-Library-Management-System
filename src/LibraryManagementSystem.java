@@ -15,14 +15,120 @@ public class LibraryManagementSystem{
         boolean running = true;
         int choice;
 
-        while (running){
+        while (running) {
             printMenu();
-            System.out.println(YELLOW + "ENTER YOUR CHOICE: " + RESET);
+            System.out.print(YELLOW + "Enter your choice: " + RESET);
 
             choice = scanner.nextInt();
             scanner.nextLine();
 
+            switch (choice) {
+                case 1: {
+                    printHeader("ADD BOOK");
+                    System.out.print("Title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Author: ");
+                    String author = scanner.nextLine();
+                    System.out.print("ISBN: ");
+                    String isbn = scanner.nextLine();
 
+                    Book book = new Book(title, author, isbn);
+                    if (library.addBook(book)) {
+                        success("Book added to the library.");
+                    } else {
+                        error("Book with this ISBN already exists.");
+                    }
+                    break;
+                }
+
+                case 2: {
+                    printHeader("REMOVE BOOK");
+                    System.out.print("ISBN: ");
+                    String isbn = scanner.nextLine();
+                    if (library.removeBook(isbn)) {
+                        success("Book removed.");
+                    } else {
+                        error("Book not found.");
+                    }
+                    break;
+                }
+
+                case 3: {
+                    printHeader("LIBRARY CATALOG");
+                    library.listBooks();
+                    break;
+                }
+
+                case 4: {
+                    printHeader("SEARCH BOOK");
+                    System.out.print("ISBN: ");
+                    String isbn = scanner.nextLine();
+                    Book found = library.searchBook(isbn);
+                    if (found != null) {
+                        success("Found: " + found);
+                    } else {
+                        error("Book not found.");
+                    }
+                    break;
+                }
+
+                case 5: {
+                    printHeader("ADD MEMBER");
+                    System.out.print("Name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Member ID: ");
+                    String memberId = scanner.nextLine();
+
+                    Member member = new Member(name, memberId);
+                    if (library.addMember(member)) {
+                        success("Member added.");
+                    } else {
+                        error("Member with this ID already exists.");
+                    }
+                    break;
+                }
+
+                case 6: {
+                    printHeader("BORROW BOOK");
+                    System.out.print("Member ID: ");
+                    String memberId = scanner.nextLine();
+                    System.out.print("ISBN: ");
+                    String isbn = scanner.nextLine();
+
+                    if (library.borrowBook(memberId, isbn)) {
+                        success("Book borrowed successfully.");
+                    } else {
+                        error("Unable to borrow book (check member ID, ISBN, or availability).");
+                    }
+                    break;
+                }
+
+                case 7: {
+                    printHeader("RETURN BOOK");
+                    System.out.print("Member ID: ");
+                    String memberId = scanner.nextLine();
+                    System.out.print("ISBN: ");
+                    String isbn = scanner.nextLine();
+
+                    if (library.returnBook(memberId, isbn)) {
+                        success("Book returned successfully.");
+                    } else {
+                        error("Unable to return book (check member ID or ISBN).");
+                    }
+                    break;
+                }
+
+                case 8:
+                    running = false;
+                    System.out.println(CYAN + "\nGoodbye!\n" + RESET);
+                    break;
+
+                default:
+                    error("Invalid choice, try again.");
+                    break;
+            }
         }
+        scanner.close();
+    }
     }
 }
