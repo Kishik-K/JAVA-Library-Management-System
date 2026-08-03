@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class LibraryManagementSystem {
 
-    // ANSI color codes
+    // ANSI COLOR CODES:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     static final String RESET = "\u001B[0m";
     static final String CYAN = "\u001B[36m";
     static final String GREEN = "\u001B[32m";
@@ -12,10 +12,12 @@ public class LibraryManagementSystem {
 
     public static void main(String[] args) {
         Library library = new Library();
+        seedData(library);
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         int choice;
 
+        //SWITCH STATEMENT & CASES::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         while (running) {
             printMenu();
             System.out.print(YELLOW + "Enter your choice: " + RESET);
@@ -132,6 +134,18 @@ public class LibraryManagementSystem {
         scanner.close();
     }
 
+    //ADDED DATA::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    static void seedData(Library library) {
+        library.addBook(new Book("The Hobbit", "J.R.R. Tolkien", "001"));
+        library.addBook(new Book("1984", "George Orwell", "002"));
+        library.addBook(new Book("Clean Code", "Robert C. Martin", "003"));
+
+        library.addMember(new Member("Keem", "M001"));
+        library.addMember(new Member("Ravi", "M002"));
+    }
+
+
+    //PRINT STATEMENTS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     static void printMenu() {
         System.out.println(CYAN + BOLD + "\n╔══════════════════════════════════════╗");
         System.out.println("║       LIBRARY MANAGEMENT SYSTEM       ║");
