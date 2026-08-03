@@ -53,6 +53,10 @@ public class LibraryManagementSystem {
                     printHeader("REMOVE BOOK");
                     System.out.print("ISBN: ");
                     String isbn = scanner.nextLine();
+                    if (isbn.trim().isEmpty()) {
+                        error("ISBN cannot be empty.");
+                        break;
+                    }
                     if (library.removeBook(isbn)) {
                         success("Book removed.");
                     } else {
